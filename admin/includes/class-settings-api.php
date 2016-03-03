@@ -8,8 +8,7 @@
  * @link http://tareq.weDevs.com Tareq's Planet
  * @example src/settings-api.php How to use the class
  */
-if ( !class_exists( 'Avma_Settings_Api' ) ):
-class Avma_Settings_Api {
+class Avlo_Settings_Api {
     /**
      * settings sections array
      *
@@ -281,7 +280,7 @@ class Avma_Settings_Api {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
         $id    = $args['section']  . '[' . $args['id'] . ']';
-        $label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose Best Image' );
+        $label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Upload!' );
         $html  = sprintf( '<input type="text" class="%1$s-text wpsa-url" id="%2$s_%3$s_" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
         $html  .= '<input type="button" class="button wpsa-browse" value="' . $label . '" />';
         $html  .= $this->get_field_description( $args );
@@ -497,4 +496,3 @@ class Avma_Settings_Api {
         <?php
     }
 }
-endif;
