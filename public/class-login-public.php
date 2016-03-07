@@ -38,7 +38,8 @@ class Wp_Login_Public {
 	 */
 	public function enqueue_styles() {
 
-		wp_enqueue_style( $this->plugin_name, AVLO_DIR . 'css/plugin-name-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, AVLO_URL . '/public/css/style.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, AVLO_URL . '/public/css/animation.css', array(), $this->version, 'all' );
 
 	}
 
@@ -49,7 +50,7 @@ class Wp_Login_Public {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( $this->plugin_name, AVLO_DIR . 'js/plugin-name-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, AVLO_URL . '/js/plugin-name-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 

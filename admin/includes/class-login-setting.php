@@ -89,7 +89,27 @@ class Avlo_Settings {
                     'type'              => 'file',
                     'default'           => ''
                 ),
-                //slider section
+                array(
+                    'name'              => 'avlo_bg_mp4',
+                    'label'             => __( 'Background Video', 'avlo_lofrm' ),
+                    'desc'              => __( 'Mp4', 'avlo_lofrm' ),
+                    'type'              => 'file',
+                    'default'           => ''
+                ),
+                array(
+                    'name'              => 'avlo_bg_webm',
+                    'label'             => __( 'Background Video', 'avlo_lofrm' ),
+                    'desc'              => __( 'Webm', 'avlo_lofrm' ),
+                    'type'              => 'file',
+                    'default'           => ''
+                ),
+                array(
+                    'name'              => 'avlo_bg_ogg',
+                    'label'             => __( 'Background Video', 'avlo_lofrm' ),
+                    'desc'              => __( 'Ogg', 'avlo_lofrm' ),
+                    'type'              => 'file',
+                    'default'           => ''
+                ),
                 array(
                     'name'              => 'avlo_bg_color',
                     'label'             => __( 'Background Color', 'avlo_lofrm' ),
@@ -111,8 +131,7 @@ class Avlo_Settings {
                     'options'           => array(
                         'wplogo'      => 'Wordpress defualt',
                         'nologo'      => 'No Logo (even default)',
-                        'logo'        => 'Custom Logo',
-                        'text'        => 'Text Instead Logo'
+                        'logo'        => 'Custom Logo'
                     )
                 ),
                 array(
@@ -123,15 +142,8 @@ class Avlo_Settings {
                     'default'           => ''
                 ),
                 array(
-                    'name'              => 'avlo_logo_txt',
-                    'label'             => __( 'Text', 'avlo_lofrm' ),
-                    'desc'              => __( 'Put your custom text here.', 'avlo_lofrm' ),
-                    'type'              => 'text',
-                    'default'           => ''
-                ),
-                array(
                     'name'              => 'avlo_div2_txt',
-                    'label'             => __( '<span class="avlo_div_txt" > Social </span>', 'avlo_lofrm' ),
+                    'label'             => __( '<span class="avlo_div_txt" > Footer </span>', 'avlo_lofrm' ),
                     'desc'              => __( '<hr>', 'avlo_lofrm' ),
                     'type'              => 'html',
                     'default'           => ''
@@ -144,6 +156,12 @@ class Avlo_Settings {
                         'deactive'     => 'Deactive',
                         'active'       => 'Active'
                 )),
+                array(
+                    'name'              => 'avlo_so_color',
+                    'label'             => __( 'Color', 'avlo_lofrm' ),
+                    'type'              => 'color',
+                    'default'           => ''
+                ),
                 array(
                     'name'              => 'avlo_social_fa',
                     'label'             => __( 'Facebook', 'avlo_lofrm' ),
@@ -201,6 +219,36 @@ class Avlo_Settings {
  
             ),
             'avlo_design_tab' => array(
+                array(
+                    'name'              => 'avlo_div031_txt',
+                    'label'             => __( '<span class="avlo_div_txt" > Form Background </span>', 'avlo_lofrm' ),
+                    'desc'              => __( '<hr>', 'avlo_lofrm' ),
+                    'type'              => 'html',
+                    'default'           => ''
+                ),
+                array(
+                    'name'              => 'avlo_frm_bg_select',
+                    'label'             => __( 'Form background', 'avlo_lofrm' ),
+                    'type'              => 'select',
+                    'options'           => array(
+                        'defualtc'   => 'Wordpress defualt',
+                        'image'      => 'Image',
+                        'color'      => 'color'
+                    )
+                ),
+                array(
+                    'name'              => 'avlo_form_bg',
+                    'label'             => __( 'Background', 'avlo_lofrm' ),
+                    'desc'              => __( 'Choose custom background for your form', 'avlo_lofrm' ),
+                    'type'              => 'file',
+                    'default'           => ''
+                ),
+                array(
+                    'name'              => 'avlo_form_co',
+                    'label'             => __( 'Form color', 'avlo_lofrm' ),
+                    'type'              => 'color',
+                    'default'           => ''
+                ),
                 array(
                     'name'              => 'avlo_div3_txt',
                     'label'             => __( '<span class="avlo_div_txt" > Form Layout </span>', 'avlo_lofrm' ),

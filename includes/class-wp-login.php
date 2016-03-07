@@ -87,9 +87,14 @@ class Wp_Login_Form {
 		new Avlo_Settings ;
 
 		/**
-		 * Functions of plugin
+		 * Functions of plugin Backend
 		 */
 		require_once AVLO_DIR .'admin/includes/login-functions.php';
+
+		/**
+		 * Functions of plugin Frontend
+		 */
+		require_once AVLO_DIR .'public/public-function.php';
 
 
 	}
@@ -134,8 +139,8 @@ class Wp_Login_Form {
 
 		$plugin_public = new Wp_Login_Public( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'login_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+		$this->loader->add_action( 'login_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 	}
 
