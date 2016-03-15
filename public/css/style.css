@@ -96,3 +96,294 @@ ul#avlo_social li{
   color: white ;
 }
 
+/*****************Style 1/*****************/
+body.style1{
+  background-color: #f1f1f1;
+  font-size: 13px;
+  font-family: "Open Sans",sans-serif;
+  min-width: 0;
+}
+
+body.style1 form#loginform{
+  padding: 30px 25px 50px 25px;
+  background-color: #ffffff;
+  border: solid 1px #e6e6e6;
+  border-radius: 0px;
+}
+
+body.style1 #login h1 {
+  text-align: center;
+}
+
+body.style1 #login h1 a {
+    background-size: 84px;
+    background-position: center top;
+    background-repeat: no-repeat;
+    height: 84px;
+    font-size: 20px;
+    line-height: 1.3em;
+    margin: 0 auto 25px;
+    padding: 0;
+    width: 84px;
+    text-indent: -9999px;
+    outline: 0;
+    display: block;
+}
+
+.style1 #loginform p:nth-child(1), .style1 #loginform p:nth-child(2){
+ font-size: 14px;
+ font-family: "Open Sans",sans-serif;
+ font-weight: bold;
+}
+
+.style1 #loginform .input{
+  height: 40px;
+  width: 270px;
+  border: 1px solid #e6e6e6;
+}
+
+.style1 #loginform .forgetmenot{
+  display: inline-block;
+
+}
+.style1 #loginform .submit{
+  display: inline-block;
+  padding-top: 15px;
+  float: right;
+}
+
+.style1 #loginform .forgetmenot label{
+  color: #aeaeae;
+}
+
+.style1 #loginform #wp-submit{
+    background-color: #0077a4;
+    padding: 9px 20px 9px 20px;
+    color:#d1dadf;
+    font-size: 14px;
+    font-family: "Open Sans",sans-serif;
+}
+
+.style1 #login #nav a, body.style1 #login #backtoblog a{
+  color: #bdbdbd;
+  margin-left: 25px;
+}
+
+/*****************Style 2/*****************/
+body.style2{
+  background-color: #ffffff;
+  font-size: 13px;
+  font-family: "Open Sans",sans-serif;
+  min-width: 0;
+}
+
+body.style2 form#loginform{
+  padding: 30px 25px 50px 25px;
+  background-color: #f1f1f1;
+  border: solid 1px #e6e6e6;
+  border-radius: 0px;
+}
+
+body.style2 #login h1 {
+  text-align: center;
+}
+
+body.style2 #login h1 a {
+    background-size: 84px;
+    background-position: center top;
+    background-repeat: no-repeat;
+    height: 84px;
+    font-size: 20px;
+    line-height: 1.3em;
+    margin: 0 auto 25px;
+    padding: 0;
+    width: 84px;
+    text-indent: -9999px;
+    outline: 0;
+    display: block;
+}
+
+.style2 #loginform p:nth-child(1), .style2 #loginform p:nth-child(2){
+ font-size: 14px;
+ font-family: "Open Sans",sans-serif;
+ font-weight: bold;
+}
+
+.style2 #loginform .input{
+  height: 40px;
+  width: 270px;
+  border: 1px solid #e6e6e6;
+}
+
+.style2 #loginform .forgetmenot{
+  display: inline-block;
+
+}
+.style2 #loginform .submit{
+  display: inline-block;
+  padding-top: 15px;
+  float: right;
+}
+
+.style2 #loginform .forgetmenot label{
+  color: #aeaeae;
+}
+
+.style2 #loginform #wp-submit{
+    background-color: #0077a4;
+    padding: 9px 20px 9px 20px;
+    color:#d1dadf;
+    font-size: 14px;
+    font-family: "Open Sans",sans-serif;
+}
+
+.style2 #login #nav a, body.style2 #login #backtoblog a{
+  color: #bdbdbd;
+  margin-left: 25px;
+}
+
+/*****************Style 3/*****************/
+body.style3{
+  background-color: #ffffff;
+  font-size: 13px;
+  font-family: "Open Sans",sans-serif;
+  min-width: 0;
+}
+
+body.style3 form#loginform{
+  padding: 30px 25px 50px 25px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 0px;
+}
+
+body.style3 #login h1 {
+  text-align: center;
+}
+
+body.style3 #login h1 a {
+    background-size: 84px;
+    background-position: center top;
+    background-repeat: no-repeat;
+    height: 84px;
+    font-size: 20px;
+    line-height: 1.3em;
+    margin: 0 auto 25px;
+    padding: 0;
+    width: 84px;
+    text-indent: -9999px;
+    outline: 0;
+    display: block;
+}
+
+.style3 #loginform p:nth-child(1), .style3 #loginform p:nth-child(2){
+ font-size: 14px;
+ font-family: "Open Sans",sans-serif;
+ font-weight: bold;
+}
+
+.style3 #loginform .input{
+  height: 40px;
+  width: 270px;
+  border: 1px solid #e6e6e6;
+}
+
+.style3 #loginform .forgetmenot{
+  display: inline-block;
+
+}
+.style3 #loginform .submit{
+  display: inline-block;
+  padding-top: 15px;
+  float: right;
+}
+
+.style3 #loginform .forgetmenot label{
+  color: #aeaeae;
+}
+
+.style3 #loginform #wp-submit{
+    background-color: #0077a4;
+    padding: 9px 20px 9px 20px;
+    color:#d1dadf;
+    font-size: 14px;
+    font-family: "Open Sans",sans-serif;
+}
+
+.style3 #login #nav a, body.style3 #login #backtoblog a{
+  color: #bdbdbd;
+  margin-left: 25px;
+}
+
+/*****************Style 4/*****************/
+body.style4{
+  background-color: #f1f1f1;
+  font-size: 13px;
+  font-family: "Open Sans",sans-serif;
+  min-width: 0;
+}
+
+body.style4 form#loginform{
+  padding: 30px 25px 50px 25px;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 0px;
+}
+
+body.style4 #login h1 {
+  text-align: center;
+}
+
+body.style4 #login h1 a {
+    background-size: 84px;
+    background-position: center top;
+    background-repeat: no-repeat;
+    height: 84px;
+    font-size: 20px;
+    line-height: 1.3em;
+    margin: 0 auto 25px;
+    padding: 0;
+    width: 84px;
+    text-indent: -9999px;
+    outline: 0;
+    display: block;
+}
+
+.style4 #loginform p:nth-child(1), .style4 #loginform p:nth-child(2){
+ font-size: 14px;
+ font-family: "Open Sans",sans-serif;
+ font-weight: bold;
+}
+
+.style4 #loginform .input{
+  height: 40px;
+  width: 270px;
+  border: 1px solid #e6e6e6;
+}
+
+.style4 #loginform .forgetmenot{
+  display: inline-block;
+
+}
+.style4 #loginform .submit{
+  display: inline-block;
+  padding-top: 15px;
+  float: right;
+}
+
+.style4 #loginform .forgetmenot label{
+  color: #aeaeae;
+}
+
+.style4 #loginform #wp-submit{
+    background-color: #0077a4;
+    padding: 9px 20px 9px 20px;
+    color:#d1dadf;
+    font-size: 14px;
+    font-family: "Open Sans",sans-serif;
+}
+
+.style4 #login #nav a, body.style4 #login #backtoblog a{
+  color: #bdbdbd;
+  margin-left: 25px;
+}

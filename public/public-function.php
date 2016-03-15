@@ -23,6 +23,5 @@ function avlo_social_show(){
 	 avlo_social('dribble') ;
 	 avlo_social('github') ;
  	echo '</ul>';
- 	
-}
+}?>
 

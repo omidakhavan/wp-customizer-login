@@ -50,7 +50,7 @@ class Wp_Login_Public {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( $this->plugin_name, AVLO_URL . '/js/plugin-name-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, AVLO_URL . '/public/js/public.js', array( 'jquery' ), $this->version, false );
 
 	}
 

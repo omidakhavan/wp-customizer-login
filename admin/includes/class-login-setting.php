@@ -131,7 +131,8 @@ class Avlo_Settings {
                     'options'           => array(
                         'wplogo'      => 'Wordpress defualt',
                         'nologo'      => 'No Logo (even default)',
-                        'logo'        => 'Custom Logo'
+                        'logo'        => 'Custom Logo',
+                        'video'       => 'video logo'  
                     )
                 ),
                 array(
@@ -285,36 +286,22 @@ class Avlo_Settings {
                 ),
                 array(
                     'name'              => 'avlo_div4_txt',
-                    'label'             => __( '<span class="avlo_div_txt" >Form Style </span>', 'avlo_lofrm' ),
+                    'label'             => __( '<span class="avlo_div_txt" >Form Skin </span>', 'avlo_lofrm' ),
                     'desc'              => __( '<hr>', 'avlo_lofrm' ),
                     'type'              => 'html',
                     'default'           => ''
                 ),
                 array(
-                    'name'              => 'avlo_input_color',
-                    'label'             => __( 'Input Box Color', 'avlo_lofrm' ),
-                    'type'              => 'color',
-                    'default'           => ''
-                ),
-                array(
-                    'name'              => 'avlo_btn_color',
-                    'label'             => __( 'Login Form Button Color', 'avlo_lofrm' ),
-                    'type'              => 'color',
-                    'default'           => ''
-                ),
-                array(
-                    'name'              => 'avlo_input_icon_u',
-                    'label'             => __( 'Input Box Icon', 'avlo_lofrm' ),
-                    'desc'              => __( 'Choose Input Box Icon', 'avlo_lofrm' ),
-                    'type'              => 'file',
-                    'default'           => ''
-                ),
-                array(
-                    'name'              => 'avlo_input_icon_p',
-                    'label'             => __( 'Password Box Icon', 'avlo_lofrm' ),
-                    'desc'              => __( 'Choose Password Box Icon', 'avlo_lofrm' ),
-                    'type'              => 'file',
-                    'default'           => ''
+                    'name'              => 'avlo_skin_select',
+                    'label'             => __( 'Login Skin', 'avlo_lofrm' ),
+                    'type'              => 'select',
+                    'options'           => array(
+                        'default'     => 'Defualt',
+                        'style1'      => 'style1',
+                        'style2'      => 'style2',
+                        'style3'      => 'style3',
+                        'style4'      => 'style4'
+                    )
                 ),
             ), 
             'avlo_url_tab' => array(
@@ -348,6 +335,18 @@ class Avlo_Settings {
                     'type'              => 'text',
                     'default'           => ''
                 ),
+                array(
+                    'name'              => 'redirect_login',
+                    'label'             => __( 'Login redirect', 'avlo_lofrm' ),
+                    'type'              => 'text',
+                    'default'           => ''
+                ),
+                array(
+                    'name'              => 'redirect_logout',
+                    'label'             => __( 'Logout redirect', 'avlo_lofrm' ),
+                    'type'              => 'text',
+                    'default'           => ''
+                ),
             ),              
         );
         return $settings_fields;
@@ -374,3 +373,5 @@ class Avlo_Settings {
         return $pages_options;
     }
 }
+
+

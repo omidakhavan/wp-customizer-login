@@ -53,26 +53,26 @@ $(document).ready(function(){
 		};
 	});
 	//save bg
-	var sr = $( '#avlo_general_tab_avlo_bg_select_ option:selected' ).text();
-	if ( sr  == 'No Background' ){
+	var av = $( '#avlo_general_tab_avlo_bg_select_ option:selected' ).text();
+	if ( av  == 'No Background' ){
 			avlo_bg.hide();
 			avlo_bg_color.hide();
 			avlo_mp4.hide();
 			avlo_webm.hide();
 			avlo_ogg.hide();
-	}else if ( sr == 'Background Image' ){
+	}else if ( av == 'Background Image' ){
 			avlo_bg.show();
 			avlo_bg_color.hide();
 			avlo_mp4.hide();
 			avlo_webm.hide();
 			avlo_ogg.hide();
-	}else if ( sr == 'Background Video' ){
+	}else if ( av == 'Background Video' ){
 			avlo_bg.hide();
 			avlo_bg_color.hide();
 			avlo_mp4.show();
 			avlo_webm.show();
 			avlo_ogg.show();
-	}else if (sr == 'Background Color' ){
+	}else if (av == 'Background Color' ){
 			avlo_bg.hide();
 			avlo_bg_color.show();
 			avlo_mp4.hide();
@@ -95,12 +95,12 @@ $(document).ready(function(){
 
 	});
 	//save logo
-	var sr = $( '#avlo_general_tab_avlo_logo_select_ option:selected' ).text();
-		if ( sr  == 'Wordpress defualt' ){
+	var ac = $( '#avlo_general_tab_avlo_logo_select_ option:selected' ).text();
+		if ( ac  == 'Wordpress defualt' ){
 				avlo_logo.hide();
-		}else if ( sr == 'No Logo (even default)' ){
+		}else if ( ac == 'No Logo (even default)' ){
 				avlo_logo.hide();
-		}else if ( sr == 'Custom Logo' ){
+		}else if ( ac == 'Custom Logo' ){
 				avlo_logo.show();
 		}
 
@@ -131,8 +131,8 @@ $(document).ready(function(){
 		};
 	});
 	//save social
-	var sr = $( '#avlo_general_tab_avlo_social_active_ option:selected' ).text();
-		if ( sr  == 'Active' ){
+	var ax = $( '#avlo_general_tab_avlo_social_active_ option:selected' ).text();
+		if ( ax  == 'Active' ){
 			avlo_fa.show();
 			avlo_tw.show();
 			avlo_in.show();
@@ -143,7 +143,7 @@ $(document).ready(function(){
 			avlo_dr.show();
 			avlo_gi.show();
 			avlo_co.show();
-		}else if ( sr  == 'Deactive' ){
+		}else if ( ax  == 'Deactive' ){
 			avlo_fa.hide();
 			avlo_tw.hide();
 			avlo_in.hide();
@@ -169,16 +169,16 @@ $(document).ready(function(){
 		}
 	});
 	//save form bg
-	var sr = $( '#avlo_design_tab_avlo_frm_bg_select_ option:selected' ).val();
-		if ( sr  == 'image' ){
+	var az = $( '#avlo_design_tab_avlo_frm_bg_select_ option:selected' ).val();
+		if ( az  == 'image' ){
 			avlo_frm_co.hide();
 			avlo_frm_bg.show();
-		}else if ( sr  == 'color' ){
+		}else if ( az  == 'color' ){
 			avlo_frm_co.show();
 			avlo_frm_bg.hide();
-		}else if ( sr == 'defualtc' ){
+		}else if ( az == 'defualtc' ){
 			avlo_frm_co.hide();
 			avlo_frm_bg.hide();
-		}	
+		}
 	});
 })( jQuery );

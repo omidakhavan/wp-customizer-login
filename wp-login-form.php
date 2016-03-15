@@ -25,7 +25,6 @@ define( 'AVLO_DIR', plugin_dir_path(  __FILE__  ));
 define( 'AVLO_URL', plugins_url( '' , __FILE__ ));
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-plugin-name-activator.php
  */
 function activate_wp_login_form() {
 	require_once AVLO_DIR . 'includes/class-login-activator.php';
@@ -34,7 +33,6 @@ function activate_wp_login_form() {
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-plugin-name-deactivator.php
  */
 function deactivate_wp_login_form() {
 	require_once AVLO_DIR . 'includes/class-login-deactivator.php';

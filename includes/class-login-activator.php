@@ -12,7 +12,7 @@
 class Wp_Login_Activator {
 
 	public static function activate() {
-
+		
 	}
 
 }
