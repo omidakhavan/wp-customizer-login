@@ -64,14 +64,6 @@ function avlo_all_option($input){
 	$avlo_input_icon_u   = avlo_get_option( 'avlo_input_icon_u'  , 'avlo_design_tab'  );
 	$avlo_input_icon_p   = avlo_get_option( 'avlo_input_icon_p'  , 'avlo_design_tab'  );
 	$avlo_skin_select	 = avlo_get_option( 'avlo_skin_select'   , 'avlo_design_tab'  );
-	//third tab options
-	$avlo_login_url      = avlo_get_option( 'avlo_login_url'     , 'avlo_url_tab'     );
-	$avlo_reg_url        = avlo_get_option( 'avlo_reg_url'       , 'avlo_url_tab'     );
-	$avlo_lost_url       = avlo_get_option( 'avlo_lost_url'      , 'avlo_url_tab'     );
-	$avlo_logout_url     = avlo_get_option( 'avlo_logout_url'    , 'avlo_url_tab'     );
-	$login_headertitle   = avlo_get_option( 'login_headertitle'  , 'avlo_url_tab'     );
-	$redirect_login      = avlo_get_option( 'redirect_login'     , 'avlo_url_tab'     );
-	$redirect_logout     = avlo_get_option( 'redirect_logout'    , 'avlo_url_tab'     );
 
 	//return oprtion value
 	switch ($input) {
@@ -173,27 +165,27 @@ function avlo_all_option($input){
 			return $avlo_skin_select ;
 			break;
 		//third tab
+		case 'is_hide_url':
+			return avlo_get_option( 'avlo_hide_url'    , 'avlo_url_tab'     ); ;
+			break;
+		case 'is_hide_admin':
+			return avlo_get_option( 'is_hide_admin'    , 'avlo_url_tab'     );
+			break;
 		case 'login_url':
 			return avlo_get_option( 'avlo_login_url'     , 'avlo_url_tab'     );
 			break;
-		case 'reg_url':
-			return $avlo_reg_url ;
+		case 'logout_url':
+			return avlo_get_option( 'avlo_logout_url'    , 'avlo_url_tab'     ); ;
+			break;
+		case 'admin_url':
+			return avlo_get_option( 'avlo_admin_url'     , 'avlo_url_tab'     ); ;
 			break;
 		case 'lost_url':
-			return $avlo_lost_url ;
+			return avlo_get_option( 'avlo_lost_url'      , 'avlo_url_tab'     ); ;
 			break;
-		case 'logout_url':
-			return $avlo_logout_url ;
+		case 'reg_url':
+			return avlo_get_option( 'avlo_reg_url'       , 'avlo_url_tab'     ); ;
 			break;
-		case 'login_title':
-			return $login_headertitle ;
-			break;
-		case 'redirect_login':
-			return avlo_get_option( 'redirect_login'     , 'avlo_url_tab'     );
-			break;	
-		case 'redirect_logout':
-			return avlo_get_option( 'redirect_logout'    , 'avlo_url_tab'     ); ;
-			break;				
 		default:
 			return "nothing";
 			break;
@@ -406,212 +398,211 @@ function multisite_body_classe($classes) {
 }
 
 
-add_action('init', 'clu_init_urls');
-add_action('init', 'clu_init_redirect');
-add_action('generate_rewrite_rules', 'clu_generate_rewrite_rules');
-function clu($url = null) {
-    $clu = array(
-        'login' => null,
-        'logout' => null,
-        'register' => null,
-        'lostpassword' => null
-    );
+if ( avlo_all_option( 'is_plugin_active' ) == 'active' ) {
 
-    $config['login'] = avlo_all_option('login_url');
-	$config['logout'] =avlo_all_option('reg_url');
-	$config['register'] = avlo_all_option('lost_url');
-	$config['lostpassword'] = avlo_all_option('logout_url');
-	$config['redirect_login'] = avlo_all_option('redirect_login');
-	$config['redirect_logout'] = avlo_all_option('redirect_logout');
+	add_option("hide_rules", "");
+	define("LOGIN_SLUG", avlo_all_option('login_url'));
+	define("ADMIN_SLUG", avlo_all_option('admin_url'));
+	define("LOGOUT_SLUG", avlo_all_option('logout_url'));
+	define("REGISTER_SLUG", avlo_all_option('register'));
+	define("FORGOT_SLUG", avlo_all_option('lost_url'));
+	/**
+	 * [access first contorol of admin]
+	 * @return [void] 
+	 */
+	add_action('init', 'avlo_access_url');
+	function avlo_access_url() {
 
+		global $current_user;
 
-    if(is_array($config)) {
-        $clu = $config;
-    }
-
-    $clu = apply_filters("clu", $clu);
-    
-    if($url === null) {
-        return $clu;
-    } elseif(isset($clu[$url]) and $clu[$url]) {
-        return $clu[$url];
-    } else {
-        return false;
-    }
-}
-
-function clu_sort($a, $b) {
-    if(strlen($a) < strlen($b)) {
-        return 1;
-    } else {
-        return -1;
-    }
-}
-
-
-function clu_init_urls() {
-    foreach(clu() as $k => $rewrite) {
-        if(!is_null($rewrite)) {
-            add_filter($k."_url", "clu_".$k."_url");
-        }
-    }
-    
-    if(clu("redirect_login")) {
-        add_filter("login_redirect", "clu_login_redirect");
-    }
-    
-    add_filter("site_url", "clu_site_url", 10, 3);
-    add_filter("wp_redirect", "clu_wp_redirect", 10, 2);
-}
-
-function clu_login_redirect($url) {
-    return site_url().clu("redirect_login");
-}
-
-function clu_wp_redirect($url, $status) {
-    
-    $login = clu("login");
-    
-    if(!$login) {
-        return $url;
-    }
-    
-    $trigger = array(
-        "wp-login.php?checkemail=registered",
-        "wp-login.php?checkemail=confirm"
-    );
-    
-    foreach($trigger as $t) {
-        if($url == $t) {
-            return str_replace("wp-login.php", site_url().$login, $url);
-        }
-    }
-    
-    return $url;
-}
-
-function clu_site_url($url, $path, $scheme = null) {
-
-    $from = array(
-        'lostpassword' => '/wp-login.php?action=lostpassword',
-        'register' => '/wp-login.php?action=register',
-        'logout' => '/wp-login.php?action=logout',
-        'login' => '/wp-login.php',
-    );
-        
-    foreach($from as $k => $find) {
-        if(clu($k)) {
-            $url = str_replace($find, clu($k), $url);
-        }
-    }
-
-    return $url;
-}
-
-function clu_generate_rewrite_rules() {
-	global $wp_rewrite;
-    
-    $rewrite = clu();    
-    uasort($rewrite, "clu_sort");
-
-	$from = array(
-        'login' => 'wp-login.php',
-        'lostpassword' => 'wp-login.php?action=lostpassword',
-        'register' => 'wp-login.php?action=register',
-		'logout' => 'wp-login.php?action=logout'
-	);
-
-    $non_wp_rules = array();
-    
-    // @todo: remove this
-    unset($rewrite["registration"]);
-    
-    foreach(array_keys($from) as $k) {
-        if(isset($rewrite[$k]) && !is_null($rewrite[$k])) {
-            $non_wp_rules[ltrim($rewrite[$k], "/")] = $from[$k];
-        }
-    }
-    
-	$wp_rewrite->non_wp_rules = $non_wp_rules + $wp_rewrite->non_wp_rules;
-}
-
-function clu_login_url($login_url, $redirect = "") {
-	$login_url = site_url( clu('login') );
-
-	if ( !empty($redirect) ) {
-		$login_url = add_query_arg('redirect_to', urlencode($redirect), $login_url);
-    }
-
-	return $login_url;
-}
-
-function clu_register_url($url) {
-    return site_url( clu('register') );
-}
-
-function clu_lostpassword_url($lostpassword_url, $redirect = "") {
-	$args = array();
-	if ( !empty($redirect) ) {
-		$args['redirect_to'] = $redirect;
+		if(avlo_all_option('is_hide_url') == 'active') {
+			if(avlo_uri() == 'wp-login.php') {
+				wp_redirect(get_option('siteurl'), 302);
+				exit;
+			}
+		}
+		echo get_option('siteurl');
+		if(avlo_uri() == LOGOUT_SLUG) {
+			if(ADMIN_SLUG != "")
+				setcookie( is_ssl() ? SECURE_AUTH_COOKIE : AUTH_COOKIE, ' ', time() - YEAR_IN_SECONDS, SITECOOKIEPATH . ADMIN_SLUG, COOKIE_DOMAIN );
+			wp_logout();
+			wp_redirect(get_option('siteurl'));
+			exit;
+		}
+		if(avlo_all_option('is_hide_admin') == 'active' && !user_can( $current_user, "edit_posts" )) {
+			if(avlo_uri() == 'wp-admin') {
+				wp_redirect(get_option('siteurl'));
+				exit;
+			}
+		}
 	}
 
-	$lostpassword_url = add_query_arg( $args, site_url( clu('lostpassword') ) );
-	return $lostpassword_url;
-}
 
-function clu_logout_url($redirect = "") {
-	$args = array();
-    
-    if ( clu("redirect_logout") ) {
-        $args['redirect_to'] = site_url().clu("redirect_logout");
-    } elseif ( !empty($redirect) ) {
-		$args['redirect_to'] = site_url();
+	/**
+	 * [avlo_uri Returns URL path]
+	 * @return string $part
+	 */
+	function avlo_uri()
+	{
+		$part = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+		$part = trim($part, "/");
+		$part = strtolower($part);
+		$part = explode("/", $part);
+		return $part[0];
+	}
+	// Hooked to Wordpress for changing cookie on new admin page
+	function avlo_admin_coo($auth_cookie, $expire) {
+		setcookie(is_ssl() ? SECURE_AUTH_COOKIE : AUTH_COOKIE, $auth_cookie, $expire, SITECOOKIEPATH . ADMIN_SLUG, COOKIE_DOMAIN, is_ssl(), true);
 	}
 
-	$logout_url = add_query_arg($args, site_url( clu('logout') ));
-	$logout_url = wp_nonce_url( $logout_url, 'log-out' );
+	// Changes wp-admin slug everywhere
+	function avlo_admin_where( $url ) {
+		return str_replace("wp-admin", ADMIN_SLUG, $url);
+	}
 
-	return $logout_url;
-}
+	if(ADMIN_SLUG != "") {
+		add_action("set_auth_cookie", "avlo_admin_coo", 10, 2);
+		add_filter('site_url',  'avlo_admin_where', 10, 1);
+	}
 
-function clu_init_redirect() {
 
-    if(!isset($_SERVER["REQUEST_URI"])) {
-        return;
-    }
-    
-    $file = basename($_SERVER["REQUEST_URI"]);
+	// Changes logout URL slug everywhere
+	add_filter('logout_url', function ($url, $redirect) {
+		return home_url("/".LOGOUT_SLUG);
+	}, 10, 2);
 
-    if(substr($file, 0, 12) != "wp-login.php") {
-        return;
-    }
-    
-    if(isset($_GET["action"])) {
-        $action = $_GET["action"];
-    } else {
-        $action = "login";
-    }
-    
-    if(isset($_GET["redirect_to"])) {
-        $redirect = $_GET["redirect_to"];
-    } else {
-        $redirect = "";
-    }
-    
-    if($action == "login" && clu("login")) {
-        $url = clu_login_url("", $redirect);
-    } elseif($action == "lostpassword" && clu("lostpassword")) {
-        $url = clu_lostpassword_url("", $redirect);
-    } elseif($action == "register" && clu("register")) {
-        $url = clu_register_url("");
-    } elseif($action == "logout" && clu("logout")) {
-        $url = clu_logout_url($redirect);
-    } else {
-        $url = null;
-    }
+	// Changes login URL slug everywhere
+	add_filter('login_url', function ($url, $redirect) {
+		return home_url("/".LOGOUT_SLUG);
+	}, 10, 2 );
 
-    if($url) {
-        wp_redirect($url);
-        exit;
-    }
-}
+	// Changes registration URL slug everywhere
+	add_filter('register',function ($url) {
+		return str_replace(site_url('wp-login.php?action=register', 'login'), site_url(REGISTER_SLUG, 'login'), $url);
+	});
+
+	// Changes lostpassword URL slug everywhere
+	add_filter('lostpassword_url', function ($url) {
+	   return str_replace('?action=lostpassword','',str_replace(network_site_url('wp-login.php', 'login'), site_url(FORGOT_SLUG, 'login'), $url));
+	});
+
+	add_action( 'login_form', 'avlo_gange_url');
+	add_action( 'register_form', 'avlo_gange_url');
+	add_action( 'lostpassword_form', 'avlo_gange_url');
+	add_action( 'resetpass_form', 'avlo_gange_url');
+	function avlo_gange_url()
+	{
+		$array = array('register_form' => REGISTER_SLUG,
+				'lostpassword_form' => FORGOT_SLUG,
+				'resetpass_form' => FORGOT_SLUG,
+				'login_form' => LOGIN_SLUG
+			);
+
+		$slug = $array[current_filter()];
+		$form = ob_get_contents();
+		$form = preg_replace( "/wp-login\.php([^\"]*)/", $slug.'$1', $form);
+		ob_get_clean();
+		echo $form;
+	}
+
+	// Where to redirect after a successful login, default redirection is `wp-admin`
+	add_action('login_redirect', function () {
+		global $redirect_to;
+		if (!isset($_GET['redirect_to'])) {
+			return get_option('siteurl')."/".(ADMIN_SLUG != "" ? ADMIN_SLUG : "wp-admin");
+		}
+		else
+			return $redirect_to;
+	});
+
+	// Redirection URL after submitting lostpassword form
+	add_filter('lostpassword_redirect', function() {
+		return site_url(LOGIN_SLUG."?checkemail=confirm" );
+	});
+
+	// Redirection URL after submitting registration form
+	add_filter('registration_redirect', function() {
+		return site_url(LOGIN_SLUG."?checkemail=registered" );
+	});
+
+	/**
+	 * [avlo_hide_uri Handles new RewriteRules as well as custom ones]
+	 */
+	function avlo_hide_uri()
+	{
+	    global $wp_rewrite;
+
+	    // Backup original .htaccess file
+		if (!file_exists(ABSPATH."/.htaccess.backup")) {
+			copy(ABSPATH."/.htaccess", ABSPATH."/.htaccess.backup");
+		}
+
+		add_rewrite_rule( avlo_all_option('login_url').'/?$', 'wp-login.php', 'top' );
+
+		if(avlo_all_option('login_url') != "")
+			add_rewrite_rule(avlo_all_option('login_url').'/(.*)', "wp-admin/$1?%{QUERY_STRING}", 'top');
+
+		if(get_option('users_can_register'))
+			add_rewrite_rule( avlo_all_option('reg_url').'/?$', 'wp-login.php?action=register', 'top' );
+
+		add_rewrite_rule( avlo_all_option('lost_url').'/?$', 'wp-login.php?action=lostpassword', 'top' );
+
+		$str = '';
+		if(avlo_all_option('admin_url') != '')
+		{
+			$forerules = array("RewriteRule" => '^'.avlo_all_option('admin_url').'$ '.avlo_all_option('admin_url').'/ [R,L]');
+
+			foreach ($forerules as $cmd => $rules) {
+				if(is_array($rules)) {
+					foreach ($rules as $rule) {
+						$str .= "$cmd $rule\r\n";
+					}
+				}
+				else
+					$str .= "$cmd $rules\r\n";
+			}
+		}
+
+		add_filter('mod_rewrite_rules', function ($rules) use ($str){
+			$pattern = "@(^\QRewriteRule ^index\.php$ - [L]\E\s)@m";
+			$rules = preg_replace($pattern, "$1".$str, $rules);
+			update_option("hide_rules", $rules);
+			return $rules;
+		});
+
+		$wp_rewrite->flush_rules(true);
+	}
+
+	/**
+	 * [redirectOnDeactivation Redirects after deactivation to prevent intrruption of old admin slug]
+	 * @return [void]
+	 */
+	add_action('deactivated_plugin', 'avlo_deactivate', 10, 1);
+	function avlo_deactivate($plugin) {
+		if($plugin == 'hide-login/hide-login.php')
+		{
+			$current = get_option( 'active_plugins', array() );
+			$key = array_search( $plugin, $current );
+			unset( $current[ $key ] );
+			update_option('active_plugins', $current);
+			exit(wp_safe_redirect('/wp-admin/plugins.php?deactivate=true&plugin_status=all&paged=1&s='));
+		}
+	}
+
+	add_action("admin_init", "avlo_start_url");
+	function avlo_start_url(){
+		if(avlo_test($error)) {
+			$type = 'error';
+			$id = 0;
+			wp_safe_redirect("/".(ADMIN_SLUG != "") ? ADMIN_SLUG : "wp-admin"."/admin.php?page=hide_settings&type=$type&id=$id");
+			exit;
+		}
+		avlo_hide_uri();
+		
+	}
+
+	function avlo_test($var)
+	{
+		return $var;
+	}
+}	

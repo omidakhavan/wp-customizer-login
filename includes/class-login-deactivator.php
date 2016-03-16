@@ -13,10 +13,9 @@
 class Wp_login_Deactivator {
 
 	public static function deactivate() {
-		    global $wp_rewrite;
-		    delete_option("clu_config");
-		    remove_action('generate_rewrite_rules', 'clu_generate_rewrite_rules');
-		    $wp_rewrite->flush_rules();
+	    remove_action( 'generate_rewrite_rules', 'avlo_hide_uri' );
+	    
+	    $GLOBALS['wp_rewrite']->flush_rules(true);
 	}
 
 }

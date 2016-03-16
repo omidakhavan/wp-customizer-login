@@ -306,44 +306,56 @@ class Avlo_Settings {
             ), 
             'avlo_url_tab' => array(
                 array(
+                    'name'              => 'avlo_hide_url',
+                    'label'             => __( 'Hide Url', 'avlo_lofrm' ),
+                    'type'              => 'radio',
+                    'options'           => array(
+                        'active'      => 'Active',
+                        'deactive'    => 'Deactive'
+                    )
+                ),
+                array(
+                    'name'              => 'avlo_hide_admin',
+                    'label'             => __( 'Hide Admin Url', 'avlo_lofrm' ),
+                    'type'              => 'radio',
+                    'options'           => array(
+                        'active'      => 'Active',
+                        'deactive'    => 'Deactive'
+                    )
+                ),
+                array(
                     'name'              => 'avlo_login_url',
                     'label'             => __( 'Login Url', 'avlo_lofrm' ),
                     'type'              => 'text',
-                    'default'           => '/wp-login.php'
-                ),
-                array(
-                    'name'              => 'avlo_reg_url',
-                    'label'             => __( 'Registration Url', 'avlo_lofrm' ),
-                    'type'              => 'text',
-                    'default'           => '/wp-login.php?action=register'
-                ),
-                array(
-                    'name'              => 'avlo_lost_url',
-                    'label'             => __( 'Lost Password Url', 'avlo_lofrm' ),
-                    'type'              => 'text',
-                    'default'           => '/wp-login.php?action=lostpassword'
+                    'default'           => 'login'
                 ),
                 array(
                     'name'              => 'avlo_logout_url',
                     'label'             => __( 'Logout Url', 'avlo_lofrm' ),
                     'type'              => 'text',
-                    'default'           => '/wp-login.php?action=logout'
+                    'default'           => 'logout'
+                ),
+                array(
+                    'name'              => 'avlo_reg_url',
+                    'label'             => __( 'Register Url', 'avlo_lofrm' ),
+                    'type'              => 'text',
+                    'default'           => 'register'
+                ),
+                array(
+                    'name'              => 'avlo_admin_url',
+                    'label'             => __( 'Admin Url', 'avlo_lofrm' ),
+                    'type'              => 'text',
+                    'default'           => ''
+                ),
+                array(
+                    'name'              => 'avlo_lost_url',
+                    'label'             => __( 'Lost Password Url', 'avlo_lofrm' ),
+                    'type'              => 'text',
+                    'default'           => 'forgot'
                 ),
                 array(
                     'name'              => 'login_headertitle',
                     'label'             => __( 'Login Hedare Title', 'avlo_lofrm' ),
-                    'type'              => 'text',
-                    'default'           => ''
-                ),
-                array(
-                    'name'              => 'redirect_login',
-                    'label'             => __( 'Login redirect', 'avlo_lofrm' ),
-                    'type'              => 'text',
-                    'default'           => ''
-                ),
-                array(
-                    'name'              => 'redirect_logout',
-                    'label'             => __( 'Logout redirect', 'avlo_lofrm' ),
                     'type'              => 'text',
                     'default'           => ''
                 ),
